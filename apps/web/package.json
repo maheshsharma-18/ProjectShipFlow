@@ -1,0 +1,22 @@
+{
+  "name": "@shipflow/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "lint": "echo 'no lint'",
+    "test": "echo 'no tests'"
+  },
+  "dependencies": {
+    "next": "16.3.0-canary.70",
+    "react": "19.0.0-rc-66855b96-20240606",
+    "react-dom": "19.0.0-rc-66855b96-20240606",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "@types/node": "26.0.1"
+  }
+}

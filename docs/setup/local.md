@@ -1,43 +1,47 @@
-# Local Development Setup (TBD)
+# Local Development Setup
 
-Use this guide to set up a local dev environment. Update as soon as the first runnable component is merged.
+Use this guide to set up ShipFlow locally using Docker Compose. This will start Postgres, Redis, the API, the worker, and the web app.
 
-## Prerequisites Checklist
-- [ ] Language runtimes and versions
-- [ ] Docker/Docker Compose (if used)
-- [ ] Databases/services (local or containers)
-- [ ] Environment variables and secrets management
+## Prerequisites
+- Node 18+
+- pnpm 9+
+- Docker Desktop/Engine
+- Accounts/keys for: Auth provider (Clerk/Auth0), Shippo (test), OpenAI (dev)
 
-## Setup Steps (TBD)
+## Setup Steps
 
 ### Install dependencies
 ```
-# TBD: e.g., pip install -r requirements.txt
-# or npm ci
+pnpm install
 ```
 
 ### Start services
 ```
-# TBD: e.g., docker compose up -d
+cp .env.example .env
+# Fill in your credentials in .env
+pnpm make dev
 ```
 
 ### Run database migrations/seed
 ```
-# TBD: e.g., alembic upgrade head
-# or prisma migrate deploy
+pnpm -w --filter @shipflow/db run migrate:dev
 ```
 
 ### Run the application(s)
 ```
-# TBD: e.g., uvicorn app.main:app --reload
-# or npm run dev
+# In one shell, or rely on compose dev targets
+pnpm -r --parallel run dev
 ```
 
 ### Run tests and linters
 ```
-# TBD: e.g., pytest -q
-# and ruff/flake8/black or eslint/prettier
+pnpm -r run test
+pnpm -r run lint
 ```
 
-## Troubleshooting (TBD)
-- TBD: Common issues, logs to check, and known workarounds.
+## Troubleshooting
+- If JWT verification fails, verify AUTH_ISSUER_URL, AUTH_AUDIENCE, and AUTH_JWKS_URL.
+- If label purchase retries, ensure idempotency keys are set and DB constraints exist.
+- Webhook 401: confirm SHIPPO_WEBHOOK_SECRET matches your Shippo webhook settings.
+- CORS errors: API allows http://localhost:3000; avoid other origins during dev.
+

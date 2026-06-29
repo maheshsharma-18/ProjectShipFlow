@@ -1,0 +1,80 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:16.3
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: shipflow
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.2.5
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ..
+      dockerfile: apps/api/Dockerfile
+    env_file: ../.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "3001:3001"
+    volumes:
+      - ../apps/api:/workspace/apps/api
+      - ../packages:/workspace/packages
+      - ../tsconfig.base.json:/workspace/tsconfig.base.json
+    command: ["pnpm", "--filter", "@shipflow/api", "run", "dev"]
+
+  worker:
+    build:
+      context: ..
+      dockerfile: apps/worker/Dockerfile
+    env_file: ../.env
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ../apps/worker:/workspace/apps/worker
+      - ../packages:/workspace/packages
+      - ../tsconfig.base.json:/workspace/tsconfig.base.json
+    command: ["pnpm", "--filter", "@shipflow/worker", "run", "dev"]
+
+  web:
+    build:
+      context: ..
+      dockerfile: apps/web/Dockerfile
+    env_file: ../.env
+    depends_on:
+      api:
+        condition: service_started
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../apps/web:/workspace/apps/web
+      - ../packages:/workspace/packages
+      - ../tsconfig.base.json:/workspace/tsconfig.base.json
+    command: ["pnpm", "--filter", "@shipflow/web", "run", "dev"]
+
+volumes:
+  pgdata:
