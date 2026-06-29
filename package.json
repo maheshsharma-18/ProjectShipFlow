@@ -1,0 +1,23 @@
+{
+  "name": "shipflow-ai-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run --workspaces --if-present build",
+    "dev": "npm run --workspace apps/web dev",
+    "test": "npm run --workspaces --if-present test",
+    "typecheck": "npm run --workspaces --if-present typecheck",
+    "lint": "echo 'lint disabled in scaffold'"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "vitest": "4.1.9",
+    "@types/node": "20.14.12",
+    "prettier": "3.3.3",
+    "eslint": "9.9.0"
+  }
+}
