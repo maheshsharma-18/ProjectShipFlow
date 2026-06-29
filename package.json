@@ -1,0 +1,20 @@
+{
+  "name": "shipflow",
+  "private": true,
+  "version": "0.1.0",
+  "description": "ShipFlow monorepo: Next.js web, NestJS API, BullMQ worker, Prisma, Redis, Shippo, OpenAI",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "pnpm -r run build",
+    "dev": "pnpm -r --parallel run dev",
+    "test": "pnpm -r run test",
+    "lint": "pnpm -r run lint || true",
+    "typecheck": "pnpm -r run typecheck"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
