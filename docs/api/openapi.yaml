@@ -1,0 +1,8 @@
+# openapi: 3.0.3
+# info:
+#   title: ShipFlow AI API (TBD)
+#   version: 0.0.0
+#
+# This file is a placeholder. Replace with the real OpenAPI specification
+# when REST endpoints are implemented. If not using REST, delete this file
+# and document gRPC/GraphQL in docs/api/reference.md accordingly.
