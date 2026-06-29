@@ -1,0 +1,24 @@
+{
+  "name": "@shipflow/inngest",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "inngest": "3.17.0",
+    "zod": "4.4.3",
+    "@shipflow/db": "workspace:*",
+    "@shipflow/ai": "workspace:*",
+    "@shipflow/github": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "vitest": "4.1.9"
+  }
+}

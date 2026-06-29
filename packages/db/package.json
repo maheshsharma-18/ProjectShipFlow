@@ -1,0 +1,23 @@
+{
+  "name": "@shipflow/db",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@prisma/client": "5.16.2"
+  },
+  "devDependencies": {
+    "prisma": "5.16.2",
+    "typescript": "6.0.3",
+    "vitest": "4.1.9"
+  }
+}

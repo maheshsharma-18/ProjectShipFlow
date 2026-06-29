@@ -1,0 +1,32 @@
+{
+  "name": "@shipflow/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "next": "16.3.0-preview.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "@shipflow/api": "workspace:*",
+    "@shipflow/auth": "workspace:*",
+    "@shipflow/db": "workspace:*",
+    "@shipflow/github": "workspace:*",
+    "@shipflow/ai": "workspace:*",
+    "@shipflow/inngest": "workspace:*",
+    "@shipflow/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "vitest": "4.1.9",
+    "tailwindcss": "3.4.10",
+    "postcss": "8.4.41",
+    "autoprefixer": "10.4.20"
+  }
+}
